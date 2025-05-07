@@ -4,33 +4,37 @@
     <title>Jeet Shah Portfolio Website</title>
 </head>
 <body>
-    <h1>Jeet Shah Portfolio Website</h1>
-    <div id="navbar">
-        <ul>
-            <li><a href="#summary">Summary</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <div class="floating-code" style="top: 20%; left: 10%; font-size: 0.8rem; color: rgba(72, 209, 204, 0.3); animation-delay: 2s;" aria-hidden="true">const x = 10; console.log(x); setTimeout(() => alert('Hello'));</div>
+<div class="container" role="main">
+  <header>
+    <h1>John Doe</h1>
+    <p>Fullstack Developer | Tech Enthusiast | Problem Solver</p>
+  </header>
+
+  <section id="about-me" tabindex="0" aria-label="About Me">
+    <h2>Who is Jeet Shah?</h2>
+    <p>
+      I am a software development student with a passion for technology and a thirst to do something fun 🤟 with coding 👨‍💻.<br>
+      <div title="also I look for new challenges so that i don't forget how to code ✌️">I am constantly seeking new challenges and opportunities to expand my skills and knowledge
+      in the field of software development.</div> With a strong foundation
+      in programming and problem-solving, I am confident in my ability
+      to tackle complex technical challenges and deliver high-quality solutions to any problem.<br>
+      I love attending workshops, participating in 
+      hackathons, or taking on new projects.<br>
+      I firmly believe that staying updated with the latest 
+      technologies and trends is crucial in this fast-paced industry.
+    </p>
+  </section>
+
+  <section id="education" tabindex="0" aria-label="Education">
+    <h2>Education</h2>
+    <div class="edu-buttons">
+      <a href="https://www.mit.edu" target="_blank" rel="noopener noreferrer" aria-label="Massachusetts Institute of Technology">MIT</a>
+      <a href="https://www.stanford.edu" target="_blank" rel="noopener noreferrer" aria-label="Stanford University">Stanford</a>
+      <a href="https://www.harvard.edu" target="_blank" rel="noopener noreferrer" aria-label="Harvard University">Harvard</a>
     </div>
-    <h3> Hello World! Connecting,connection establised,welcome to the world of Jeet Shah </h3> 
-    <div id="summary">
-        <p>
-            <h4>Who is Jeet Shah?</h4>
-            I am Jeet Shah,I am a software development student with a passion for technology and a thirst to do something fun 🤟 with coding 👨‍💻.<br>
-            <div title="also I look for new challenges so that i don't forget how to code ✌️">I am constantly seeking new challenges and opportunities to expand my skills and knowledge
-            in the field of software development.</div> With a strong foundation
-            in programming and problem-solving, I am confident in my ability
-            to tackle complex technical challenges and deliver high-quality solutions to any problem.<br>
-            I love attending workshops, participating in 
-            hackathons, or taking on new projects.<br>
-            I firmly believe that staying updated with the latest 
-            technologies and trends is crucial in this fast-paced industry.<br>
-        </p>
-    </div>
-    <div id="education">
+  </section>
+  <!-- <div id="education">
         <h4>Thankfully due to the various painstaking efforts of my teachers and professors to hammer their knowledge in me<br> I have acquired knowledge like no other! </h4>
         <div id="college">
             <h5><img src="">Mohawk college</h5>
@@ -50,11 +54,25 @@
             <h5><img src="">junior High School</h5>
             <p>Studied at <a href="https://www.bhavansbaroda.org/">Bhartiya Vidya Bhavans - BVB VADODARA</a><br> and passed out in 2020 with a score of 90% in the CBSE 10 board exams.</p>
         </div>
-    </div>
-    <div id="skills">
-        <div id="programming-languages">
-            <h4>Programming Languages</h4>
-            <ul>
+    </div>-->
+
+  <section id="projects" tabindex="0" aria-label="Projects">
+    <h2>Projects</h2>
+    <ul>
+      <li>Portfolio Website - A clean and responsive portfolio site built with HTML, CSS, and JavaScript.</li>
+      <li>Task Manager App - React app with CRUD and local storage feature.</li>
+      <li>Blog Platform - Fullstack blog application with authentication and posting.</li>
+    </ul>
+  </section>
+
+  <section id="resume" tabindex="0" aria-label="Resume">
+    <h2>Resume</h2>
+    <a href="https://example.com/resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open my resume in PDF format">View My Resume</a>
+  </section>
+
+  <section id="skills" tabindex="0" aria-label="Skills">
+    <h2>Skills</h2>
+    <!-- <ul>
                 <li>Java</li>
                 <li>Python</li>
                 <li>JavaScript</li>
@@ -66,21 +84,32 @@
                 <li>React</li>
                 <li>GitHub</li>
                 <li>Rest API</li>
-            </ul>
-        </div>
+            </ul>-->
+    <div class="skill">
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 90%;"></div></div>
     </div>
-    <div id="projects"></div>
-    <div id="resume">REsume</div>
-    <div id="contact">
-        <h4>Contact</h4>
-        <p>Email: <a href="mailto:jeetshah317@gmail.com">jeetshah317@gmail.com</a></p>
-        <p>Phone: <a href="tel:+12896985665">289-698-5662</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/jeet-shah-7b7b3b1b4/">Jeet Shah</a></p>
-        <p>GitHub: <a href="">JeetShah243</a></p>
+    <div class="skill">
+      <div class="skill-name">React</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 80%;"></div></div>
     </div>
-    <footer>
-        <p>&copy; 2025 Jeet Shah</p>
-    </footer>
+    <div class="skill">
+      <div class="skill-name">Node.js</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 70%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Python</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 75%;"></div></div>
+    </div>
+  </section>
 
+  <section id="contact" tabindex="0" aria-label="Contact Details">
+    <h2>Contact</h2>
+    <p><span>Email:</span> johndoe@example.com</p>
+    <p><span>Phone:</span> +1 234 567 8901</p>
+    <p><span>LinkedIn:</span> <a href="https://linkedin.com/in/johndoe" target="_blank" rel="noopener noreferrer" style="color:#58d68d;">linkedin.com/in/johndoe</a></p>
+    <p><span>GitHub:</span> <a href="https://github.com/johndoe" target="_blank" rel="noopener noreferrer" style="color:#48c9b0;">github.com/johndoe</a></p>
+  </section>
+</div>
 </body>
 </html>
