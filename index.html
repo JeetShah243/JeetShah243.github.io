@@ -1,22 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Jeet Shah Portfolio Website</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Jeet Shah Portfolio</title>
+<style>
+  /* Reset and base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0e1117;
+    color: #eee;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Techy radial gradient background with subtle animation */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+    animation: bgGradientShift 15s ease infinite alternate;
+    z-index: -2;
+    pointer-events: none;
+  }
+  @keyframes bgGradientShift {
+    0% {
+      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+    }
+    50% {
+      background: radial-gradient(circle at 30% 40%, #164a6e, #2d7a94, #134955);
+    }
+    100% {
+      background: radial-gradient(circle at 70% 60%, #0f2027, #203a43, #2c5364);
+    }
+  }
+
+  /* Techy animated background with coding style grid lines */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+    z-index: -1;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift {
+    0% { background-position: 0 0, 0 0 }
+    100% { background-position: 50px 50px, 50px 50px; }
+  }
+  /* Additional techy floating code text */
+  .floating-code {
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: rgba(72, 209, 204, 0.3); /* turquoise */
+    user-select: none;
+    white-space: nowrap;
+    animation: floatCode 15s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes floatCode {
+    0% { transform: translateX(0) translateY(0); opacity: 0.15; }
+    50% { opacity: 0.3; }
+    100% { transform: translateX(300px) translateY(-20px); opacity: 0.15; }
+  }
+
+  /* Container */
+  .container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    z-index: 1;
+  }
+
+  header {
+    padding-bottom: 1em;
+    text-align: left;
+    border-bottom: 2px solid #16a085; /* teal */
+    margin-bottom: 2em;
+  }
+  header h1 {
+    font-size: 2.8rem;
+    color: #58d68d; /* light green */
+    text-shadow: 0 0 5px #58d68d;
+    animation: fadeInUp 1.5s ease forwards;
+  }
+  header p {
+    font-size: 1.2rem;
+    color: #a9dfbf;
+    margin-top: 8px;
+  }
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .text-content {
+    flex: 1;
+  }
+  .image-content {
+    flex: 0 0 150px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .image-content img {
+    width: 100%;
+    height: auto;
+    max-width: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(72, 209, 204, 0.5);
+    animation: fadeInUp 1.5s ease forwards;
+  }
+
+  /* Sections style */
+  section {
+    margin-bottom: 3em;
+    padding: 1em 1.5em;
+    background: #11161b;
+    border-radius: 12px;
+    box-shadow: 0 0 15px 2px rgba(9, 132, 227, 0.15);
+    animation: fadeInUp 1.5s ease forwards;
+  }
+  section:nth-child(even) {
+    box-shadow: 0 0 15px 2px rgba(213, 0, 249, 0.15);
+  }
+  section h2 {
+    margin-bottom: 1em;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #48c9b0; /* turquoise */
+    border-bottom: 2px solid #48c9b0;
+    padding-bottom: 6px;
+  }
+
+  /* About Me */
+  #about-me p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #d6dbdf;
+  }
+
+  /* Education Buttons */
+  #education .edu-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  #education .edu-buttons a {
+    flex: 1 1 120px;
+    background: #148f77; /* dark teal */
+    color: #ebf5fb;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px 0 #16a085;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  #education .edu-buttons a:hover {
+    background: #2471a3; /* blue */
+    color: #ebf5fb;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 2px #3498db;
+  }
+
+  /* Projects List */
+  #projects ul {
+    list-style-type: none;
+  }
+  #projects li {
+    background: #0d3b66;
+    padding: 10px 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #205375;
+    color: #d1d8e0;
+    font-weight: 600;
+    cursor: default;
+    transition: transform 0.25s ease;
+  }
+  #projects li:hover {
+    background: #3da9fc;
+    color: #0d1b2a;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #3da9fc;
+  }
+
+  /* Resume Link */
+  #resume a {
+    display: inline-block;
+    background: #eb4d4b; /* pink/red */
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 0 10px #eb4d4b;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  #resume a:hover {
+    background: #ff7979;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #ff7979;
+  }
+
+  /* Skills */
+  #skills .skill {
+    margin-bottom: 1em;
+  }
+  #skills .skill-name {
+    font-weight: 600;
+    color: #82e0aa;
+    margin-bottom: 6px;
+  }
+  #skills .skill-bar {
+    width: 100%;
+    height: 22px;
+    background: #22313f;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 0 5px #145a32;
+  }
+  #skills .skill-level {
+    height: 100%;
+    background: linear-gradient(90deg, #58d68d, #45b39d);
+    width: 0;
+    border-radius: 12px;
+    animation: skillFill 2s forwards;
+  }
+
+  /* Contact */
+  #contact p {
+    font-size: 1.1rem;
+    color: #d5dbdb;
+  }
+  #contact p span {
+    font-weight: 700;
+    color: #f8c471;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes skillFill {
+    to {
+      width: var(--skill-level);
+    }
+  }
+
+  /* Responsive for mobile screens */
+  @media (max-width: 600px) {
+    .container {
+      padding: 15px 10px;
+      width: 95vw;
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+    section {
+      margin-bottom: 2em;
+      padding: 1em 1em;
+    }
+    #education .edu-buttons {
+      flex-direction: column;
+    }
+    #education .edu-buttons a {
+      flex: 1 1 auto;
+    }
+    #projects li {
+      font-size: 1rem;
+    }
+    #resume a {
+      padding: 12px 22px;
+      font-size: 1rem;
+    }
+    /* Ensure everything fits vertically within ~600px height */
+    body, html {
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+</style>
 </head>
 <body>
-    <div class="floating-code" style="top: 20%; left: 10%; font-size: 0.8rem; color: rgba(72, 209, 204, 0.3); animation-delay: 2s;" aria-hidden="true">const x = 10; console.log(x); setTimeout(() => alert('Hello'));</div>
+
+<!--<div class="floating-code" aria-hidden="true">const x = 10; console.log(x); setTimeout(() => alert('Hello'));</div>
+<div class="floating-code" style="top: 70%; left: 80%; font-size: 0.6rem; color: rgba(232, 126, 4, 0.25); animation-delay: 7s;" aria-hidden="true">function foo() { return 'bar'; }</div>
+-->
+<div class="floating-code" style="top: 20%; left: 10%; font-size: 0.8rem; color: rgba(72, 209, 204, 0.3); animation-delay: 2s;" aria-hidden="true">const x = 10; console.log(x); setTimeout(() => alert('Hello'));</div>
 <div class="container" role="main">
   <header>
-    <h1>John Doe</h1>
-    <p>Fullstack Developer | Tech Enthusiast | Problem Solver</p>
+    <div class="header-content">
+      <div class="text-content">
+        <h1>Jeet Shah</h1>
+        <p>Fullstack Developer | Tech Enthusiast | Problem Solver</p>
+      </div>
+      <div class="image-content">
+        <img src="PORTFOLIO_COPY1.jpg" alt="Profile Picture" />
+      </div>
+    </div>
   </header>
+    
 
   <section id="about-me" tabindex="0" aria-label="About Me">
     <h2>Who is Jeet Shah?</h2>
     <p>
       I am a software development student with a passion for technology and a thirst to do something fun 🤟 with coding 👨‍💻.<br>
-      <div title="also I look for new challenges so that i don't forget how to code ✌️">I am constantly seeking new challenges and opportunities to expand my skills and knowledge
-      in the field of software development.</div> With a strong foundation
+      I am constantly seeking new challenges and opportunities to expand my skills and knowledge
+      in the field of software development. With a strong foundation
       in programming and problem-solving, I am confident in my ability
       to tackle complex technical challenges and deliver high-quality solutions to any problem.<br>
       I love attending workshops, participating in 
@@ -29,9 +356,11 @@
   <section id="education" tabindex="0" aria-label="Education">
     <h2>Education</h2>
     <div class="edu-buttons">
-      <a href="https://www.mit.edu" target="_blank" rel="noopener noreferrer" aria-label="Massachusetts Institute of Technology">MIT</a>
-      <a href="https://www.stanford.edu" target="_blank" rel="noopener noreferrer" aria-label="Stanford University">Stanford</a>
-      <a href="https://www.harvard.edu" target="_blank" rel="noopener noreferrer" aria-label="Harvard University">Harvard</a>
+      <a href="https://www.mohawkcollege.ca/programs/technology/computer-systems-technology-software-development-559" target="_blank" rel="noopener noreferrer" aria-label="Mohawk College">Mohawk College - Fennel Campus</a>
+      <a href="https://oshwalcollege.ac.ke/" target="_blank" rel="noopener noreferrer" aria-label="Oshwal College">Oshwal College - Nairobi</a>
+      <a href="https://www.agrasenvidyalaya.ac.in/" target="_blank" rel="noopener noreferrer" aria-label="Maharaja Agrasen Vidhyalaya">MAV AHMEDABAD</a>
+      <a href="https://www.bhavansbaroda.org/" target="_blank" rel="noopener noreferrer" aria-label="Bhartiya Vidya Bhavans">BVB VADODARA</a>
+      <a href="https://www.sclpsschool.ac.ke/" target="_blank" rel="noopener noreferrer" aria-label="Shree Cutchi Leva Patel Samaj School and College">SCLP Samaj School and College - Nairobi</a>
     </div>
   </section>
   <!-- <div id="education">
@@ -39,20 +368,20 @@
         <div id="college">
             <h5><img src="">Mohawk college</h5>
             <h6>Advanced Diploma Computer Systems Technology - Software Development - 559</h6>
-            <p>Currently studying at <a href="https://www.mohawkcollege.ca/programs/technology/computer-systems-technology-software-development-559">Mohawk College - Fennel Campus</a><br> in the Software Development program. I am in my 2nd year and have a GPA of 79.5.</p>
+            <p>Currently studying at <a href="https://www.mohawkcollege.ca/programs/technology/computer-systems-technology-software-development-559" target="_blank" rel="noopener noreferrer" aria-label="Mohawk College">Mohawk College - Fennel Campus</a><br> in the Software Development program. I am in my 2nd year and have a GPA of 79.5.</p>
         </div>
         <div id="college">
             <h5><img src="">Oshwal college</h5>
             <h6>Microsoft Office Specialist - MOS Associate</h6>
-            <p>studied at <a href="https://oshwalcollege.ac.ke/">Oshwal College - Nairobi</a><br> to prepare and attempt my MOS Associate certification Examination.</p>
+            <p>studied at <a href="https://oshwalcollege.ac.ke/" target="_blank" rel="noopener noreferrer" aria-label="Oshwal College">Oshwal College - Nairobi</a><br> to prepare and attempt my MOS Associate certification Examination.</p>
         </div>
         <div id="Senior-High-School">
             <h5><img src="">Senior High School</h5>
-            <p>Studied at <a href="https://www.agrasenvidyalaya.ac.in/">Maharaja Agrasen Vidhyalaya - MAV AHMEDABAD</a><br> and passed out in 2022 with a score of 90% in the CBSE 12 board exams.</p>
+            <p>Studied at <a href="https://www.agrasenvidyalaya.ac.in/" target="_blank" rel="noopener noreferrer" aria-label="Maharaja Agrasen Vidhyalaya">Maharaja Agrasen Vidhyalaya - MAV AHMEDABAD</a><br> and passed out in 2022 with a score of 90% in the CBSE 12 board exams.</p>
         </div>
         <div id="junior-high-school">
             <h5><img src="">junior High School</h5>
-            <p>Studied at <a href="https://www.bhavansbaroda.org/">Bhartiya Vidya Bhavans - BVB VADODARA</a><br> and passed out in 2020 with a score of 90% in the CBSE 10 board exams.</p>
+            <p>Studied at <a href="https://www.bhavansbaroda.org/" target="_blank" rel="noopener noreferrer" aria-label="Bhartiya Vidya Bhavans">Bhartiya Vidya Bhavans - BVB VADODARA</a><br> and passed out in 2020 with a score of 90% in the CBSE 10 board exams.</p>
         </div>
     </div>-->
 
@@ -67,7 +396,7 @@
 
   <section id="resume" tabindex="0" aria-label="Resume">
     <h2>Resume</h2>
-    <a href="https://example.com/resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open my resume in PDF format">View My Resume</a>
+    <a href="jeet_shah_resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open my resume in PDF format">View My Resume</a>
   </section>
 
   <section id="skills" tabindex="0" aria-label="Skills">
@@ -101,15 +430,66 @@
       <div class="skill-name">Python</div>
       <div class="skill-bar"><div class="skill-level" style="--skill-level: 75%;"></div></div>
     </div>
+
+    <div class="skill">
+      <div class="skill-name">Python</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 75%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Python</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 75%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Python</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 75%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Python</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 75%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Python</div>
+      <div class="skill-bar"><div class="skill-level" style="--skill-level: 75%;"></div></div>
+    </div>
+    
   </section>
 
   <section id="contact" tabindex="0" aria-label="Contact Details">
     <h2>Contact</h2>
-    <p><span>Email:</span> johndoe@example.com</p>
-    <p><span>Phone:</span> +1 234 567 8901</p>
-    <p><span>LinkedIn:</span> <a href="https://linkedin.com/in/johndoe" target="_blank" rel="noopener noreferrer" style="color:#58d68d;">linkedin.com/in/johndoe</a></p>
-    <p><span>GitHub:</span> <a href="https://github.com/johndoe" target="_blank" rel="noopener noreferrer" style="color:#48c9b0;">github.com/johndoe</a></p>
+    <p><span>Email:</span> <a href="mailto:jeetshah317@gmail.com" target="_blank" rel="noopener noreferrer" style="color:#48c9b0;">jeetshah317@gmail.com</a></p>
+    <p><span>Phone:</span> <a href="tel:+12896985665" target="_blank" rel="noopener noreferrer" style="color:#48c9b0;">+1 289-698-5662</a></p>
+    <p><span>LinkedIn:</span> <a href="https://www.linkedin.com/in/jeet-shah-7b7b3b1b4/" target="_blank" rel="noopener noreferrer" style="color:#48c9b0;">Jeet Shah</a></p>
+    <p><span>GitHub:</span> <a href="https://github.com/JeetShah243" target="_blank" rel="noopener noreferrer" style="color:#48c9b0;">JeetShah243</a></p>
   </section>
 </div>
+<footer>
+  <p>&copy; 2025 Jeet Shah</p>
+</footer>
+<!--<div id="contact">
+        <h4>Contact</h4>
+        <p>Email: </p>
+        <p>Phone: <a href="tel:+12896985665">289-698-5662</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/jeet-shah-7b7b3b1b4/" target="_blank" rel="noopener noreferrer" style="color:#48c9b0;">Jeet Shah</a></p>
+        <p>GitHub: <a href="" target="_blank" rel="noopener noreferrer" style="color:#48c9b0;>JeetShah243</a></p>
+    </div>-->
+<!--<footer>
+        <p>&copy; 2025 Jeet Shah</p>
+    </footer>-->
+
+<script>
+  // Animate skill bars fill when visible
+  function animateSkills() {
+    const skills = document.querySelectorAll('.skill-level');
+    skills.forEach(skill => {
+      skill.style.width = skill.style.getPropertyValue('--skill-level');
+    });
+  }
+  window.addEventListener('load', () => {
+    animateSkills();
+  });
+</script>
+
 </body>
 </html>
+</content>
+</create_file>
